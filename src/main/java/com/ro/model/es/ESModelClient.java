@@ -1,6 +1,6 @@
 //implemented as singleton
 
-package com.ro.model;
+package com.ro.model.es;
 
 import org.apache.http.HttpHost;
 import org.apache.logging.log4j.LogManager;
@@ -12,16 +12,16 @@ import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 
 public class ESModelClient extends ESModel {
-    private static Logger logger = LogManager.getLogger(ESModelClient.class);
-    private static ESModelClient esModelClientInsance = null;
+    private static final Logger logger = LogManager.getLogger(ESModelClient.class);
+    private static ESModelClient esModelClientInstance = null;
     private RestHighLevelClient restHighLevelClient = null;
 
     public static ESModelClient getESModelClientInstance(String server_url, String domain, int port, String protocol) {
-        if(esModelClientInsance == null) {
+        if(esModelClientInstance == null) {
             return new ESModelClient(server_url, domain, port, protocol);
         }
 
-        return esModelClientInsance;
+        return esModelClientInstance;
     }
 
     private ESModelClient(String server_url, String domain, int port, String protocol){

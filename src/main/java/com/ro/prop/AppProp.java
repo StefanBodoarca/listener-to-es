@@ -2,6 +2,8 @@ package com.ro.prop;
 
 import java.io.*;
 import java.util.Properties;
+
+import com.ro.model.Constants;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -20,8 +22,12 @@ public final class AppProp {
         try {
             Properties prop = new Properties();
 
-            inputStream = AppProp.class
-                    .getClassLoader().getResourceAsStream("config.properties");
+            if(Constants.production) {
+                inputStream = new FileInputStream("./resources/config.properties");
+            } else {
+                inputStream = AppProp.class
+                        .getClassLoader().getResourceAsStream("config.properties");
+            }
 
 
             Reader reader = new InputStreamReader(inputStream, "UTF-8");

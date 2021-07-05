@@ -1,6 +1,6 @@
 //implemented as singleton
 
-package com.ro.model;
+package com.ro.model.es;
 import com.ro.prop.AppProp;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -8,12 +8,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
 public class ESModelRestCalls extends ESModel {
-    private static Logger logger = LogManager.getLogger(ESModelRestCalls.class);
+    private static final Logger logger = LogManager.getLogger(ESModelRestCalls.class);
 
     private static ESModelRestCalls esModelRestCallsInstance = null;
 

@@ -5,7 +5,7 @@ import org.owasp.html.Sanitizers;
 
 import java.util.ArrayList;
 
-public class StringHelper {
+public final class StringHelper {
 
     private StringHelper(){}
 

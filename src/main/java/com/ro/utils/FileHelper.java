@@ -7,7 +7,7 @@ import java.io.*;
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 
-public class FileHelper {
+public final class FileHelper {
     private static final Logger logger = LogManager.getLogger(FileHelper.class);
 
     private FileHelper() {

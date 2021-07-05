@@ -1,4 +1,4 @@
-package com.ro.model;
+package com.ro.model.es;
 
 public abstract class ESModel {
     protected String SERVER_URL = "";
