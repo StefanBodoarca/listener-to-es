@@ -4,14 +4,15 @@ import com.ro.controller.reader.MessageReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ExtensionListener implements Runnable {
     private static final Logger logger = LogManager.getLogger(ExtensionListener.class);
-    private LinkedBlockingQueue messageQueue = null;
+    private BlockingQueue messageQueue = null;
     private MessageReader reader = null;
 
-    public ExtensionListener(LinkedBlockingQueue messageQueue) {
+    public ExtensionListener(BlockingQueue messageQueue) {
         this.messageQueue = messageQueue;
         reader = new MessageReader();
     }
@@ -21,8 +22,7 @@ public class ExtensionListener implements Runnable {
         while(true) {
             //read messages and send for processing
             try {
-                String message = reader.readMessage();
-                logger.info("message", message);
+                this.messageQueue.put(reader.readMessage());
                 Thread.sleep(100);
             } catch (InterruptedException iex) {
                 logger.error(iex.getMessage(), iex);

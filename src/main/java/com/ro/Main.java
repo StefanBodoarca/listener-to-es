@@ -1,6 +1,7 @@
 package com.ro;
 
 import com.ro.controller.ThreadController;
+import com.ro.model.Constants;
 import com.ro.model.es.ESModel;
 import com.ro.model.es.ESModelClient;
 import com.ro.model.es.ESModelRestCalls;
@@ -17,6 +18,9 @@ public class Main {
             //createIndexRest(AppProp.ELASTIC_SEARCH_URL, AppProp.DOMAIN, AppProp.PORT, AppProp.PROTOCOL, "index-rest");
             //createIndexClient(AppProp.ELASTIC_SEARCH_URL, AppProp.DOMAIN, AppProp.PORT, AppProp.PROTOCOL, "index-client");
             new ThreadController().startThreads();
+            if(AppProp.CHROME_DEBUG_ENABLED) {
+                System.err.println("App Started");
+            }
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);

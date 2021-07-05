@@ -16,13 +16,14 @@ public final class AppProp {
     public static String DOMAIN = "";
     public static int PORT = -1;
     public static String PROTOCOL = "";
+    public static boolean CHROME_DEBUG_ENABLED = false;
     private AppProp() {}
 
     public static void loadConfig() throws IOException {
         try {
             Properties prop = new Properties();
 
-            if(Constants.production) {
+            if(Constants.PRODUCTION) {
                 inputStream = new FileInputStream("./resources/config.properties");
             } else {
                 inputStream = AppProp.class
@@ -41,6 +42,7 @@ public final class AppProp {
             DOMAIN = prop.getProperty("DOMAIN");
             PORT = Integer.parseInt(prop.getProperty("PORT"));
             PROTOCOL = prop.getProperty("PROTOCOL");
+            CHROME_DEBUG_ENABLED = Boolean.parseBoolean(prop.getProperty("CHROME_DEBUG_ENABLED"));
 
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

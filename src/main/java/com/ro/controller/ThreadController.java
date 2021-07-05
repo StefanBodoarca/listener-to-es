@@ -2,12 +2,14 @@ package com.ro.controller;
 
 import com.ro.controller.listener.ExtensionListener;
 import com.ro.controller.reader.QueueReader;
+
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ThreadController {
-    private LinkedBlockingQueue<String> messageQueue = new LinkedBlockingQueue<>();
-    private ExtensionListener extensionListener = null;
-    private QueueReader queueReader = null;
+    private BlockingQueue<String> messageQueue = new LinkedBlockingQueue<>();
+    private ExtensionListener extensionListener;
+    private QueueReader queueReader;
 
     public ThreadController() {
         this.extensionListener = new ExtensionListener(this.messageQueue);
@@ -16,5 +18,6 @@ public class ThreadController {
 
     public void startThreads() {
         new Thread(this.extensionListener).start();
+        new Thread(this.queueReader).start();
     }
 }
