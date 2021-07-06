@@ -1,13 +1,10 @@
 package com.ro.controller.reader;
 
-import com.ro.controller.listener.ExtensionListener;
 import com.ro.prop.AppProp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class QueueReader implements Runnable {
     private static final Logger logger = LogManager.getLogger(QueueReader.class);
