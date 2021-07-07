@@ -17,6 +17,8 @@ public final class AppProp {
     public static int PORT = -1;
     public static String PROTOCOL = "";
     public static boolean CHROME_DEBUG_ENABLED = false;
+    public static String ES_USER = "";
+    public static String ES_USER_PASSWORD = "";
     private AppProp() {}
 
     public static void loadConfig() throws IOException {
@@ -43,6 +45,9 @@ public final class AppProp {
             PORT = Integer.parseInt(prop.getProperty("PORT"));
             PROTOCOL = prop.getProperty("PROTOCOL");
             CHROME_DEBUG_ENABLED = Boolean.parseBoolean(prop.getProperty("CHROME_DEBUG_ENABLED"));
+            ES_USER = prop.getProperty("ES_USER");
+            ES_USER_PASSWORD = prop.getProperty("ES_USER_PASSWORD");
+
 
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

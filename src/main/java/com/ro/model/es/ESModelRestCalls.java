@@ -2,10 +2,7 @@
 
 package com.ro.model.es;
 import com.ro.prop.AppProp;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,16 +13,16 @@ public class ESModelRestCalls extends ESModel {
 
     private static ESModelRestCalls esModelRestCallsInstance = null;
 
-    public static ESModelRestCalls getEsModelInstance(String server_url, String domain, int port, String protocol) {
+    public static ESModelRestCalls getEsModelInstance(String server_url, String domain, int port, String protocol, String username, String password) {
         if(esModelRestCallsInstance == null) {
-            return new ESModelRestCalls(server_url, domain, port, protocol);
+            return new ESModelRestCalls(server_url, domain, port, protocol, username, password);
         }
 
         return esModelRestCallsInstance;
     }
 
-    private ESModelRestCalls(String server_url, String domain, int port, String protocol){
-        super(server_url, domain, port, protocol);
+    private ESModelRestCalls(String server_url, String domain, int port, String protocol, String username, String password){
+        super(server_url, domain, port, protocol, username, password);
     }
 
     @Override
@@ -37,6 +34,7 @@ public class ESModelRestCalls extends ESModel {
             Request request = new Request.Builder()
                     .url(AppProp.ELASTIC_SEARCH_URL + "/" + indexName)
                     .method("PUT", RequestBody.create(null, new byte[0]))
+                    .header("Authorization", Credentials.basic(this.ES_USER, this.ES_USER_PASSWORD))
                     .build();
             response = client.newCall(request).execute();
 
@@ -53,6 +51,11 @@ public class ESModelRestCalls extends ESModel {
 
     @Override
     public int postDoc(String indexName, String jsonDoc, String docID) {
+        return -1;
+    }
+
+    @Override
+    public int deleteIndex(String indexName) {
         return -1;
     }
 

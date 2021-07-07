@@ -42,7 +42,7 @@ public class DocTest {
     @DisplayName("Should insert doc to es")
     public void insertDocToEsTestThroughHighLevelClient() throws IOException {
         AppProp.loadConfig();
-        ESModel model = ESModelClient.getESModelClientInstance(AppProp.ELASTIC_SEARCH_URL, AppProp.DOMAIN, AppProp.PORT, AppProp.PROTOCOL);
+        ESModel model = ESModelClient.getESModelClientInstance(AppProp.ELASTIC_SEARCH_URL, AppProp.DOMAIN, AppProp.PORT, AppProp.PROTOCOL, AppProp.ES_USER, AppProp.ES_USER_PASSWORD);
         assertEquals(200, model.postDoc(this.indexName, this.document.toJson(), this.docName));
     }
 
