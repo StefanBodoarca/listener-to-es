@@ -19,7 +19,6 @@ public class Main {
             if(AppProp.CHROME_DEBUG_ENABLED) {
                 System.err.println("App Started");
             }
-
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }

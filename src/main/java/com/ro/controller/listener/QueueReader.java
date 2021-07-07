@@ -35,7 +35,7 @@ public class QueueReader implements Runnable {
             //take message and process
             try {
                 String jsonMessage = this.messageQueue.take().toString();
-                if(AppProp.CHROME_DEBUG_ENABLED) {
+                if (AppProp.CHROME_DEBUG_ENABLED) {
                     System.err.println("Message from queue: " + jsonMessage);
                 }
 
