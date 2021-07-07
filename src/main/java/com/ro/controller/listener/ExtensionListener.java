@@ -23,9 +23,6 @@ public class ExtensionListener implements Runnable {
             try {
                 //read messages and send for processing
                 String message = reader.readMessage();
-                if (AppProp.CHROME_DEBUG_ENABLED) {
-                    System.err.println("Message received before putting to queue: " + message);
-                }
                 if (message != null && message.length() > 0) {
                     this.messageQueue.put(message);
                 }
