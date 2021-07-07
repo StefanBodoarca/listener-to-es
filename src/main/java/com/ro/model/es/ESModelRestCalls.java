@@ -51,4 +51,9 @@ public class ESModelRestCalls extends ESModel {
         }
     }
 
+    @Override
+    public int postDoc(String indexName, String jsonDoc, String docID) {
+        return -1;
+    }
+
 }

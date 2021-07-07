@@ -13,4 +13,5 @@ public abstract class ESModel {
         this.PROTOCOL = protocol;
     }
     abstract public int putIndex(String indexName);
+    abstract public int postDoc(String indexName, String jsonDoc, String docID);
 }
