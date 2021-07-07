@@ -1,7 +1,7 @@
 package com.ro.controller;
 
 import com.ro.controller.listener.ExtensionListener;
-import com.ro.controller.reader.QueueReader;
+import com.ro.controller.listener.QueueReader;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
