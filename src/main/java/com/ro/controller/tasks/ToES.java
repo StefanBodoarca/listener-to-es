@@ -16,12 +16,11 @@ public class ToES extends CommonES implements Runnable {
 
     @Override
     public void run() {
-        String document = this.jsonDocument;
+        JSONObject document = this.jsonDocument;
         if(document.length() > 0) {
-            JSONObject obj = new JSONObject(document);
-            String _doc = obj.getString("_doc");
-            String _index_name = obj.getString("_index_name");
-            String _doc_id = obj.getString("_doc_id");
+            String _doc = document.getJSONObject("_doc").toString();
+            String _index_name = document.getString("_index_name");
+            String _doc_id = document.getString("_doc_id");
             int code = this.esModel.postDoc(_index_name, _doc, _doc_id);
             if(AppProp.CHROME_DEBUG_ENABLED) {
                 System.err.println("Response code form ES: " + code);
