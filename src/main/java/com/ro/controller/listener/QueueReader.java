@@ -16,8 +16,6 @@ public class QueueReader implements Runnable {
     private BlockingQueue messageQueue;
     private ToES toESInstance;
     private FromES fromESInstance;
-    private Thread toESThread;
-    private Thread fromESThread;
     private ESModel esModel;
 
     public QueueReader(BlockingQueue messageQueue) {
@@ -25,8 +23,6 @@ public class QueueReader implements Runnable {
         this.esModel = ESModelClient.getESModelClientInstance(AppProp.ELASTIC_SEARCH_URL, AppProp.DOMAIN, AppProp.PORT, AppProp.PROTOCOL, AppProp.ES_USER, AppProp.ES_USER_PASSWORD);
         this.toESInstance = new ToES(this.esModel);
         this.fromESInstance = new FromES(this.esModel);
-        toESThread = new Thread(this.toESInstance);
-        fromESThread = new Thread(this.fromESInstance);
     }
 
     @Override
@@ -35,17 +31,17 @@ public class QueueReader implements Runnable {
             //take message and process
             try {
                 String jsonMessage = this.messageQueue.take().toString();
-                if (AppProp.CHROME_DEBUG_ENABLED) {
-                    System.err.println("Message from queue: " + jsonMessage);
+                if(AppProp.CHROME_DEBUG_ENABLED) {
+                    System.err.println("Message from queue: "  + jsonMessage);
                 }
 
                 JSONObject obj = new JSONObject(jsonMessage);
                 if(obj.getString("action").equals("TO_ES")) {
-                    this.toESInstance.setJsonDocument(obj.getString("document"));
-                    this.toESThread.start();
+                    this.toESInstance.setJsonDocument(obj.getJSONObject("document"));
+                    new Thread(this.toESInstance).start();
                 } else if(obj.getString("action").equals("FROM_ES")) {
-                    this.fromESInstance.setJsonDocument(obj.getString("query"));
-                    this.fromESThread.start();
+                    this.fromESInstance.setJsonDocument(obj.getJSONObject("query"));
+                    new Thread(this.fromESInstance).start();
                 }
 
                 Thread.sleep(100);
